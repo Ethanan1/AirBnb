@@ -35,7 +35,7 @@ function App() {
           <Route exact path ='/spots/:spotId'>
             <SpotDetail />
           </Route>
-          {/* <Route exact path="/spots/:spotId/edit">
+          <Route exact path="/spots/:spotId/edit">
             <EditSpotForm />
           </Route>
           <Route exact path ='/spots'>
@@ -48,7 +48,7 @@ function App() {
           </Route>
           <Route exact path ='/reviews'>
             <ReviewDetail />
-          </Route> */}
+          </Route>
         </Switch>
 
       )}
