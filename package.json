@@ -1,0 +1,19 @@
+{
+  "name": "airbnbproj",
+  "version": "1.0.0",
+  "description": "airbnb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ethanan1/AirBnb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ethanan1/AirBnb/issues"
+  },
+  "homepage": "https://github.com/Ethanan1/AirBnb#readme"
+}
