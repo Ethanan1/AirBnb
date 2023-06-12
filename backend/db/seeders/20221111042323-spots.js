@@ -66,7 +66,7 @@ const spots = [
     country: "United States of America",
     lat: 120.7645358,
     lng: -25.4730327,
-    name: "Nice home in colorful neighborhood",
+    name: "Nice home",
     description: "Small cozy home in San Francisco",
     price: 174,
     previewImage: "https://www.extraspace.com/blog/wp-content/uploads/2020/05/best-places-to-buy-a-home-san-francisco-bernal-heights.jpg", // Update with the actual URL for the image
