@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "airbnb",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build"
-  },
+
+"scripts": {
+  "install": "npm --prefix backend install backend",
+  "dev:backend": "npm install --prefix backend start",
+  "sequelize": "npm run --prefix backend sequelize",
+  "sequelize-cli": "npm run --prefix backend sequelize-cli",
+  "start": "npm start --prefix backend",
+  "build": "npm run --prefix backend build"
+},
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ethanan1/AirBnb.git"
