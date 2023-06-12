@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
         minPrice,
         maxPrice
       } = req.query;
-    
+
     page = parseInt(page);
     size = parseInt(size);
-    
+
     if (Number.isNaN(page) || page < 0) page = 0;
     if (Number.isNaN(size) || size < 0) size = 0;
 
@@ -50,13 +50,13 @@ router.get('/', async (req, res) => {
       if (maxPrice) {
         where['price'] = { [Op.lte]: maxPrice };
       }
-    
+
       const pagination = {};
       if ( page >= 1 && size>= 1){
           pagination.limit = size;
           pagination.offset = size * (page - 1);
-      };   
-      
+      };
+
     const spots = await Spot.findAll({
         where,
         ...pagination
@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
 //Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
-    
+
     const spot = await Spot.findByPk(spotId, {
         include: [
             {
@@ -87,14 +87,14 @@ router.get('/:spotId', async (req, res, next) => {
         const totalReviews = spot.dataValues.Reviews.length
         spot.dataValues.numReviews = totalReviews
 
-        let sumofStars = 0 
+        let sumofStars = 0
         spot.dataValues.Reviews.forEach(review =>{
             sumofStars += review.stars
         })
 
         spot.dataValues.avgStarRating = sumofStars/totalReviews
 
-        return res.json(spot);    
+        return res.json(spot);
     } else {
         const err = newError(404, "Spot couldn't be found",[
             "Spot couldn't be found"
@@ -119,7 +119,7 @@ router.post('/',requireAuth, async (req, res) => {
         price,
         ownerId: req.user.id
     })
-    
+
     if(newSpot.address.length > 250) {
       const err = newError(404, "Character limit of 250",[
           "Character limit of 250"
@@ -130,14 +130,14 @@ router.post('/',requireAuth, async (req, res) => {
     return res.json(newSpot)
   })
 
-//Add an Image to a Spot based on the Spot's id 
+//Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 
     const spotId = req.params.spotId;
     const { url, preview } = req.body;
 
     const spot = await Spot.findByPk(spotId)
-      
+
     if(!spot) {
         const err = newError(404, "Spot couldn't be found",[
             "Spot couldn't be found"
@@ -150,7 +150,7 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
         preview,
         spotId: spot.id
       })
-  
+
       return res.json(newImage)
   })
 
@@ -158,19 +158,20 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
 router.put('/:spotId/edit',requireAuth, async (req, res, next) => {
 
     const spotId = req.params.spotId;
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
     const updateSpot = await Spot.findByPk(spotId)
      if (updateSpot) {
       await updateSpot.update({
-        address, 
-        city, 
-        state, 
-        country, 
-        lat, 
-        lng, 
-        name, 
-        description, 
-        price
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+        previewImage
       });
       res.json(updateSpot)
     } else {
@@ -186,7 +187,7 @@ router.delete("/:spotId", requireAuth, async(req, res, next) =>{
     const spotId = req.params.spotId;
 
     const deleteItem = await Spot.findByPk(spotId);
-  
+
     if (deleteItem) {
       await deleteItem.destroy()
       res.json({
@@ -206,7 +207,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     const spotId = req.params.spotId;
 
     const spot = await Spot.findByPk(spotId)
-      
+
     if(!spot) {
         const err = newError(404, "Spot couldn't be found",[
             "Spot couldn't be found"
@@ -229,7 +230,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     })
 
 
-    res.json({"Reviews" : review});    
+    res.json({"Reviews" : review});
 
 })
 
@@ -253,23 +254,23 @@ router.post('/:spotId/reviews',requireAuth, async (req, res, next) => {
           "You cannot review your own spot"
       ]);
       return next(err);
-      }    
-    const existinguserReview = await Review.findOne({ where: {userId: req.user.id}});  
-    
+      }
+    const existinguserReview = await Review.findOne({ where: {userId: req.user.id}});
+
     if(existinguserReview) {
         const err = newError(403, "User already has a review for this spot",[
             "User already has a review for this spot"
         ]);
         return next(err);
       }
-        
+
     const newReview= await Review.create({
         review,
         stars,
         spotId: spot.id,
         userId: req.user.id
       })
-  
+
       return res.json(newReview)
   })
 
@@ -297,7 +298,7 @@ router.get('/:spotId/bookings', async (req, res, next) => {
     })
 
     if (booking) {
-        res.json({"Bookings" : booking});    
+        res.json({"Bookings" : booking});
     } else {
         res.json({
             "message": "Spot couldn't be found",
@@ -349,7 +350,7 @@ router.post('/:spotId/bookings',requireAuth, async (req, res, next) => {
           'Start date conflicts with an existing booking'
         ]);
         return next(err);
-      }  
+      }
 
     const newBooking= await Booking.create({
         startDate,
@@ -357,7 +358,7 @@ router.post('/:spotId/bookings',requireAuth, async (req, res, next) => {
         spotId: spot.id,
         userId: req.user.id
       })
-  
+
       return res.json(newBooking)
   })
 
@@ -368,7 +369,7 @@ router.delete("/:spotId/images", requireAuth, async(req, res, next) =>{
     const deleteItem = await SpotImage.findOne({
         where: {spotId : spotId}
         });
-  
+
     if (deleteItem) {
       await deleteItem.destroy({ where: { spotId: [spotId] }})
       res.json({
@@ -381,6 +382,6 @@ router.delete("/:spotId/images", requireAuth, async(req, res, next) =>{
         ]);
         return next(err);
     }
-  })  
-  
+  })
+
 module.exports = router;

@@ -12,9 +12,9 @@ const SpotForm = () => {
     const [lat, setLat] = useState('');
     const [lng, setLng] = useState('');
     const [name, setName] = useState('');
-    // const [img]
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [previewImage, setPreviewImage] = useState('');
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -23,9 +23,9 @@ const SpotForm = () => {
     const updateLat= (e) => setLat(e.target.value);
     const updateLng= (e) => setLng(e.target.value);
     const updateName= (e) => setName(e.target.value);
-    // const updateImgUrl = (e) => setImgUrl(e.target.value);
     const updateDescription= (e) => setDescription(e.target.value);
     const updatePrice= (e) => setPrice(e.target.value);
+    const updatePreviewImage = (e) => setPreviewImage(e.target.value);
 
     const dispatch = useDispatch();
 
@@ -45,7 +45,8 @@ const SpotForm = () => {
             lng,
             name,
             description,
-            price
+            price,
+            previewImage
         }
 
         if(errors.length === 0) {
@@ -131,15 +132,6 @@ const SpotForm = () => {
                     onChange={updateLng}
                  />
                 </div>
-                {/* <div>
-                <label>img url:</label>
-                <input
-                    type = "text"
-                    value = {}
-                    required
-                    onChange={updateLng}
-                 />
-                </div> */}
                 <div>
                 <label>Name:</label>
                 <input
@@ -166,6 +158,15 @@ const SpotForm = () => {
                     required
                     min = "1"
                     onChange={updatePrice}
+                 />
+                </div>
+                <div>
+                <label>Preview Image:</label>
+                <input
+                    type = "text"
+                    value = {previewImage}
+                    required
+                    onChange={updatePreviewImage}
                  />
                 </div>
                 <button className="button">Submit</button>
