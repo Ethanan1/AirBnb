@@ -1,0 +1,32 @@
+.spot-detail-form{
+    width: max-content;
+    margin: 40px auto;
+    font-family: "Arial";
+    padding: 25px 28px;
+    background: lightgrey;
+    border-radius: 4px;
+    animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.spot-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    width: 520px;
+    height: 350px;
+    background: white;
+    border-radius: 10px;
+}
+h4 {
+    text-align: left;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #6E6D70;
+}
+.review-link{
+    font-size: 20px;
+    font-weight:bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
