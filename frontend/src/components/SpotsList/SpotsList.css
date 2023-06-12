@@ -1,0 +1,17 @@
+/* SpotsList.css */
+.spots-list-container {
+    text-align: center;
+  }
+
+  .spots-list-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .spot-list-arrange {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+  }
