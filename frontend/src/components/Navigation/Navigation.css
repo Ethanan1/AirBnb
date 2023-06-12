@@ -1,0 +1,56 @@
+/* Navigation.css */
+
+.navbar_user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.button_auth {
+  background-color: #6E6D70;
+  border-radius: 8px;
+  border: none;
+  color: #DFDEDF;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.home {
+  font-size: 35px;
+  font-weight: bold;
+  text-transform: lowercase;
+  color: #FF5A5F;
+  text-decoration: none;
+}
+
+.spot {
+  font-size: 30px;
+  font-weight: bold;
+  color: #6E6D70;
+  text-decoration: none;
+}
+
+body {
+  background-color: #F1F1F2;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.fab.fa-airbnb.fa-2x {
+  color: red;
+}
