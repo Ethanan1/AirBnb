@@ -1,0 +1,14 @@
+.review-delete-button {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: "Arial", sans-serif;
+    font-size: 15px;
+    text-align: center;
+    display:table-cell;
+    vertical-align:middle;
+    border-radius: 6px;
+    border: none;
+    background: #6E6D70;
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+    color: #DFDEDF;
+  }

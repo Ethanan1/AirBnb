@@ -1,0 +1,8 @@
+.review-form {
+    width: max-content;
+    font-family: "Arial";
+    padding: 25px 28px;
+    background: lightgrey;
+    border-radius: 4px;
+    animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
