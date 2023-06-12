@@ -20,8 +20,8 @@ const SpotForm = () => {
     const updateCity = (e) => setCity(e.target.value);
     const updateState= (e) => setState(e.target.value);
     const updateCountry = (e) => setCountry(e.target.value);
-    const updateLat= (e) => setLat(e.target.value);
-    const updateLng= (e) => setLng(e.target.value);
+    // const updateLat= (e) => setLat(e.target.value);
+    // const updateLng= (e) => setLng(e.target.value);
     const updateName= (e) => setName(e.target.value);
     const updateDescription= (e) => setDescription(e.target.value);
     const updatePrice= (e) => setPrice(e.target.value);
@@ -41,8 +41,8 @@ const SpotForm = () => {
             city,
             state,
             country,
-            lat,
-            lng,
+            // lat,
+            // lng,
             name,
             description,
             price,
@@ -114,8 +114,8 @@ const SpotForm = () => {
                  />
 
                 </div>
-                <div>
-                <label>Lat:</label>
+                {/* <div> */}
+                {/* <label>Lat:</label>
                 <input
                     type = "number"
                     value = {lat}
@@ -131,7 +131,7 @@ const SpotForm = () => {
                     required
                     onChange={updateLng}
                  />
-                </div>
+                </div> */}
                 <div>
                 <label>Name:</label>
                 <input

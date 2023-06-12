@@ -13,10 +13,10 @@ router.get('/', async (req, res) => {
     let {
         page = 0,
         size = 20,
-        maxLat,
-        minLat,
-        minLng,
-        maxLng,
+        // maxLat,
+        // minLat,
+        // minLng,
+        // maxLng,
         minPrice,
         maxPrice
       } = req.query;
@@ -32,18 +32,18 @@ router.get('/', async (req, res) => {
 
     const where = {};
 
-    if (maxLat) {
-        where['lat'] = { [Op.lte]: maxLat };
-      }
-      if (minLat) {
-        where['lat'] = { [Op.gte]: minLat };
-      }
-      if (maxLng) {
-        where['lng'] = { [Op.lte]: maxLng };
-      }
-      if (minLng) {
-        where['lng'] = { [Op.gte]: minLng };
-      }
+    // if (maxLat) {
+    //     where['lat'] = { [Op.lte]: maxLat };
+    //   }
+    //   if (minLat) {
+    //     where['lat'] = { [Op.gte]: minLat };
+    //   }
+    //   if (maxLng) {
+    //     where['lng'] = { [Op.lte]: maxLng };
+    //   }
+    //   if (minLng) {
+    //     where['lng'] = { [Op.gte]: minLng };
+    //   }
       if (minPrice) {
         where['price'] = { [Op.gte]: minPrice };
       }
@@ -112,8 +112,8 @@ router.post('/',requireAuth, async (req, res) => {
         city,
         state,
         country,
-        lat,
-        lng,
+        // lat,
+        // lng,
         name,
         description,
         price,
@@ -166,8 +166,8 @@ router.put('/:spotId/edit',requireAuth, async (req, res, next) => {
         city,
         state,
         country,
-        lat,
-        lng,
+        // lat,
+        // lng,
         name,
         description,
         price,
@@ -258,6 +258,7 @@ router.post('/:spotId/reviews',requireAuth, async (req, res, next) => {
     const existinguserReview = await Review.findOne({ where: {userId: req.user.id}});
 
     if(existinguserReview) {
+      console.log("sdfsdf", existinguserReview)
         const err = newError(403, "User already has a review for this spot",[
             "User already has a review for this spot"
         ]);

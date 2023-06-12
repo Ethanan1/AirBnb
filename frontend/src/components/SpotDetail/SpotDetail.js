@@ -8,15 +8,15 @@ const SpotDetail = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
-    
+
     const { spotId } = useParams();
 
     const spot = useSelector(state => state.spots[spotId]);
-    
+
     const deleteHandler = () => {
         dispatch(deleteSpot(spot.id))
     }
-    
+
     useEffect(() => {
         dispatch(loadSingleSpot(spotId))
             .then(res => setIsLoaded(true));
@@ -34,8 +34,8 @@ const SpotDetail = () => {
             <div><i class="fa-solid fa-star"></i>{spot.avgStarRating} <a><Link to={`/spots/${spot.id}/reviews`} style={{ color: "black" }}>{spot.numReviews} reviews </Link></a></div>
             <div>{spot.city}, {spot.state}, {spot.country}</div>
             <div><img className="spot-image" src={spot.previewImage}></img></div>
-            <div>Address: {spot.address}</div> 
-            <div>Lat & Lng: {spot.lat}, {spot.lng}</div>
+            <div>Address: {spot.address}</div>
+            {/* <div>Lat & Lng: {spot.lat}, {spot.lng}</div> */}
             <div>Description: {spot.description}</div>
             <div>$ {spot.price} night</div>
             <br></br>
@@ -45,7 +45,7 @@ const SpotDetail = () => {
             </div>
         </form>
         )
-    )    
+    )
 }
 
 export default SpotDetail

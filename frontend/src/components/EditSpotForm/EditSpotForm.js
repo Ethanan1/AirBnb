@@ -19,8 +19,8 @@ const EditSpotForm = () => {
   const [city, setCity] = useState(spot.city || '');
   const [state, setState] = useState(spot.state || '');
   const [country, setCountry] = useState(spot.country || '');
-  const [lat, setLat] = useState(spot.lat || '');
-  const [lng, setLng] = useState(spot.lng || '');
+  // const [lat, setLat] = useState(spot.lat || '');
+  // const [lng, setLng] = useState(spot.lng || '');
   const [name, setName] = useState(spot.name || '');
   const [description, setDescription] = useState(spot.description || '');
   const [price, setPrice] = useState(spot.price || '');
@@ -30,8 +30,8 @@ const EditSpotForm = () => {
   const updateCity = (e) => setCity(e.target.value);
   const updateState = (e) => setState(e.target.value);
   const updateCountry = (e) => setCountry(e.target.value);
-  const updateLat = (e) => setLat(e.target.value);
-  const updateLng = (e) => setLng(e.target.value);
+  // const updateLat = (e) => setLat(e.target.value);
+  // const updateLng = (e) => setLng(e.target.value);
   const updateName = (e) => setName(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
@@ -50,8 +50,8 @@ const EditSpotForm = () => {
       city,
       state,
       country,
-      lat,
-      lng,
+      // lat,
+      // lng,
       name,
       description,
       price,
@@ -82,14 +82,14 @@ const EditSpotForm = () => {
         <label>Country:</label>
         <input type="text" value={country} required onChange={updateCountry} />
       </div>
-      <div>
+      {/* <div>
         <label>Lat:</label>
         <input type="number" value={lat} required onChange={updateLat} />
       </div>
       <div>
         <label>Lng:</label>
         <input type="number" value={lng} required onChange={updateLng} />
-      </div>
+      </div> */}
       <div>
         <label>Name:</label>
         <input type="text" value={name} required onChange={updateName} />
