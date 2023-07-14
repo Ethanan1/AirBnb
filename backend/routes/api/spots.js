@@ -184,7 +184,7 @@ router.put('/:spotId/edit',requireAuth, async (req, res, next) => {
   })
 
 // Delete a Spot
-router.delete("/:spotId", requireAuth, async (req, res, next) => {
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
   try {
     const spotId = req.params.spotId;
 
@@ -193,13 +193,13 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     if (deleteItem) {
       await deleteItem.destroy();
       return res.status(200).json({
-        message: "Successfully deleted",
+        message: 'Successfully deleted',
         statusCode: 200,
       });
     } else {
       // Spot not found
       return res.status(404).json({
-        message: "Spot not found",
+        message: 'Spot not found',
         statusCode: 404,
       });
     }
@@ -264,7 +264,13 @@ router.post('/:spotId/reviews',requireAuth, async (req, res, next) => {
       ]);
       return next(err);
       }
-    const existinguserReview = await Review.findOne({ where: {userId: req.user.id}});
+
+    const existinguserReview = await Review.findOne({
+        where: {
+          userId: req.user.id,
+          spotId: spot.id // Add this condition
+        }
+      });
 
     if(existinguserReview) {
       console.log("sdfsdf", existinguserReview)

@@ -91,11 +91,11 @@ export const signup = (user) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
+  console.log('logout hit')
   const response = await csrfFetch('/api/session', {
     method: 'DELETE',
   });
   dispatch(removeUser());
-  console.log('session.js2')
   return response;
 };
 

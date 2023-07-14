@@ -13,6 +13,7 @@ const SpotDetail = () => {
 
     const spot = useSelector(state => state.spots[spotId]);
 
+    // why is my console log not hitting???
     const deleteHandler = () => {
         console.log('delete spot!!!!')
         dispatch(deleteSpot(spot.id))
@@ -27,7 +28,7 @@ const SpotDetail = () => {
     // console.log(spot)
     // if (!spot && isLoaded) return <Redirect to='/spots' />
     if (!spot) {
-        // console.log('sdfdsfsfdsfdsfdsfdsfdsfdsf')
+        console.log('sdfdsfsfdsfdsfdsfdsfdsfdsf')
         return <Redirect to='/spots' />
     }
     const isOwner = sessionUser.id === spot.ownerId;
