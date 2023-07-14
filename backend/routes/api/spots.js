@@ -155,33 +155,36 @@ router.post('/:spotId/images',requireAuth, async (req, res, next) => {
       return res.json(newImage)
   })
 
-//Edit a Spot
-router.put('/:spotId/edit',requireAuth, async (req, res, next) => {
+// Edit a Spot
+router.put('/:spotId/edit', requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
-    const spotId = req.params.spotId;
-    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
-    const updateSpot = await Spot.findByPk(spotId)
-     if (updateSpot) {
-      await updateSpot.update({
-        address,
-        city,
-        state,
-        country,
-        // lat,
-        // lng,
-        name,
-        description,
-        price,
-        previewImage
-      });
-      res.json(updateSpot)
-    } else {
-        const err = newError(404, "Spot couldn't be found",[
-            "Spot couldn't be found"
-        ]);
-        return next(err);
-    }
-  })
+  const updateSpot = await Spot.findByPk(spotId);
+
+  if (updateSpot) {
+    await updateSpot.update({
+      address,
+      city,
+      state,
+      country,
+      // lat,
+      // lng,
+      name,
+      description,
+      price,
+      previewImage
+    });
+    res.json(updateSpot);
+  } else {
+    const err = newError(404, "Spot couldn't be found", [
+      "Spot couldn't be found"
+    ]);
+    return next(err);
+  }
+}); // <-- Add this closing bracket
+
+
 
 // Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
@@ -243,52 +246,147 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
 })
 
-//Create a review for a spot based on the spot's id
-router.post('/:spotId/reviews',requireAuth, async (req, res, next) => {
+// Create or edit a review for a spot based on the spot's id
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const { reviewId, review, stars } = req.body; // Add reviewId parameter
 
-    const spotId = req.params.spotId;
-    const { review, stars } = req.body;
+  const spot = await Spot.findByPk(spotId);
 
-    const spot = await Spot.findByPk(spotId)
+  if (!spot) {
+    const err = newError(404, "Spot couldn't be found", ["Spot couldn't be found"]);
+    return next(err);
+  }
 
-    if(!spot) {
-        const err = newError(404, "Spot couldn't be found",[
-            "Spot couldn't be found"
-        ]);
-        return next(err);
-      }
+  if (req.user.id === spot.ownerId) {
+    const err = newError(403, "You cannot review your own spot", ["You cannot review your own spot"]);
+    return next(err);
+  }
 
-    if(req.user.id === spot.ownerId){
-        const err = newError(403, "You cannot review your own spot",[
-          "You cannot review your own spot"
+  if (reviewId) {
+    // If reviewId is provided, update the existing review
+    const existingReview = await Review.findByPk(reviewId);
+
+    if (!existingReview) {
+      const err = newError(404, "Review couldn't be found", ["Review couldn't be found"]);
+      return next(err);
+    }
+
+    // Check if the review belongs to the user and the same spot
+    if (existingReview.userId !== req.user.id || existingReview.spotId !== spot.id) {
+      const err = newError(403, "You are not authorized to edit this review", [
+        "You are not authorized to edit this review"
       ]);
       return next(err);
+    }
+
+    // Edit a review based on the review's id
+    router.put('/reviews/:reviewId/edit', requireAuth, async (req, res, next) => {
+      const reviewId = req.params.reviewId;
+      const { review, stars } = req.body;
+
+      const existingReview = await Review.findByPk(reviewId);
+
+      if (!existingReview) {
+        const err = newError(404, "Review couldn't be found", ["Review couldn't be found"]);
+        return next(err);
       }
 
-    const existinguserReview = await Review.findOne({
-        where: {
-          userId: req.user.id,
-          spotId: spot.id // Add this condition
-        }
-      });
-
-    if(existinguserReview) {
-      console.log("sdfsdf", existinguserReview)
-        const err = newError(403, "User already has a review for this spot",[
-            "User already has a review for this spot"
+      if (existingReview.userId !== req.user.id) {
+        const err = newError(403, "You are not authorized to edit this review", [
+          "You are not authorized to edit this review"
         ]);
         return next(err);
       }
 
-    const newReview= await Review.create({
-        review,
-        stars,
-        spotId: spot.id,
-        userId: req.user.id
-      })
+  existingReview.review = review;
+  existingReview.stars = stars;
+  await existingReview.save();
 
-      return res.json(newReview)
-  })
+  return res.json(existingReview);
+});
+
+
+
+    // Update the review
+    existingReview.review = review;
+    existingReview.stars = stars;
+    await existingReview.save();
+
+    return res.json(existingReview);
+  } else {
+    // Create a new review
+    const existingUserReview = await Review.findOne({
+      where: {
+        userId: req.user.id,
+        spotId: spot.id
+      }
+    });
+
+    if (existingUserReview) {
+      const err = newError(403, "User already has a review for this spot", [
+        "User already has a review for this spot"
+      ]);
+      return next(err);
+    }
+
+    const newReview = await Review.create({
+      review,
+      stars,
+      spotId: spot.id,
+      userId: req.user.id
+    });
+
+    return res.json(newReview);
+  }
+});
+
+// //Create a review for a spot based on the spot's id
+// router.post('/:spotId/reviews',requireAuth, async (req, res, next) => {
+
+//     const spotId = req.params.spotId;
+//     const { review, stars } = req.body;
+
+//     const spot = await Spot.findByPk(spotId)
+
+//     if(!spot) {
+//         const err = newError(404, "Spot couldn't be found",[
+//             "Spot couldn't be found"
+//         ]);
+//         return next(err);
+//       }
+
+//     if(req.user.id === spot.ownerId){
+//         const err = newError(403, "You cannot review your own spot",[
+//           "You cannot review your own spot"
+//       ]);
+//       return next(err);
+//       }
+
+//     const existinguserReview = await Review.findOne({
+//         where: {
+//           userId: req.user.id,
+//           spotId: spot.id // Add this condition
+//         }
+//       });
+
+//     if(existinguserReview) {
+//       console.log("sdfsdf", existinguserReview)
+//         const err = newError(403, "User already has a review for this spot",[
+//             "User already has a review for this spot"
+//         ]);
+//         return next(err);
+//       }
+
+//     const newReview= await Review.create({
+//         review,
+//         stars,
+//         spotId: spot.id,
+//         userId: req.user.id
+//       })
+
+//       return res.json(newReview)
+//   })
 
 // Get all Bookings by a Spot's id
 router.get('/:spotId/bookings', async (req, res, next) => {

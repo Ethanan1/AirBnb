@@ -26,14 +26,14 @@ router.post('/:reviewId/images',requireAuth, async (req, res, next) => {
         url,
         reviewId: review.id
       })
-  
+
       return res.json(newReview)
   })
 
 //Edit a Review
-router.put('/:reviewId',requireAuth, async (req, res, next) => {
+router.put('/:reviewId/edit',requireAuth, async (req, res, next) => {
 
-    const reviewId = req.params.reviewId;    
+    const reviewId = req.params.reviewId;
 
     const { review, stars } = req.body;
     const updateReview = await Review.findByPk(reviewId)
@@ -57,7 +57,7 @@ router.put('/:reviewId',requireAuth, async (req, res, next) => {
     const reviewId = req.params.reviewId;
 
     const deleteItem = await Review.findByPk(reviewId);
-  
+
     if (deleteItem) {
       await deleteItem.destroy()
       return res.json({
@@ -92,6 +92,6 @@ router.delete("/:reviewId/images", requireAuth, async(req, res, next) =>{
       ]);
       return next(err);
   }
-})    
+})
 
 module.exports = router;
