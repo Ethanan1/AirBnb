@@ -67,6 +67,7 @@ export const postSpot = (spot) => async (dispatch) =>{
 	return res
 }
 
+//issue is here??????
 export const deleteSpot = (spotId) => async (dispatch) => {
 	const res = await csrfFetch(`/api/spots/${spotId}`,{
 		method: 'DELETE'
@@ -74,6 +75,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 
 	if (res.ok) {
 		const data = await res.json();
+		console.log('remove spot!')
 		dispatch(removeSpot(spotId))
 	}
 }

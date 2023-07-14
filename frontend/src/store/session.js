@@ -32,18 +32,35 @@ export const login = (user) => async (dispatch) => {
 
 const initialState = { user: {} };
 
+// const sessionReducer = (state = initialState, action) => {
+//   let newState;
+//   switch (action.type) {
+//     case SET_USER:
+//       newState = Object.assign({}, state);
+//       newState.user = action.payload;
+//       return newState;
+//     case REMOVE_USER:
+//       newState = Object.assign({}, state);
+//       newState.user = {};
+
+//       return newState;
+//     default:
+//       return state;
+//   }
+// };
 const sessionReducer = (state = initialState, action) => {
-  let newState;
   switch (action.type) {
     case SET_USER:
-      newState = Object.assign({}, state);
-      newState.user = action.payload;
-      return newState;
+      return {
+        ...state,
+        user: action.payload
+      };
     case REMOVE_USER:
-      newState = Object.assign({}, state);
-      newState.user = {};
-
-      return newState;
+      console.log('session.js')
+      return {
+        ...state,
+        user: {}
+      };
     default:
       return state;
   }
@@ -78,6 +95,7 @@ export const logout = () => async (dispatch) => {
     method: 'DELETE',
   });
   dispatch(removeUser());
+  console.log('session.js2')
   return response;
 };
 

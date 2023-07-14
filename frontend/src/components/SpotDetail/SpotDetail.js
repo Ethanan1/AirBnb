@@ -14,8 +14,10 @@ const SpotDetail = () => {
     const spot = useSelector(state => state.spots[spotId]);
 
     const deleteHandler = () => {
+        console.log('delete spot!!!!')
         dispatch(deleteSpot(spot.id))
     }
+
 
     useEffect(() => {
         dispatch(loadSingleSpot(spotId))
@@ -29,6 +31,7 @@ const SpotDetail = () => {
         return <Redirect to='/spots' />
     }
     const isOwner = sessionUser.id === spot.ownerId;
+
 
     return (
         isLoaded && (
