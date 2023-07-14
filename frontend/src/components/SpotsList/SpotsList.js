@@ -10,6 +10,8 @@ const SpotsList = (spots) => {
 
     const spotsObj = useSelector(state => state.spots)
     const spotsArr = Object.values(spotsObj);
+    // const spotss = useSelector(state => state.spots);
+    // console.log(spotss);
 
     useEffect(() => {
         dispatch(loadAllSpots()).then(()=> setIsLoaded(true))

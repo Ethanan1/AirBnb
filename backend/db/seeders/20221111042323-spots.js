@@ -56,7 +56,7 @@ const spots = [
     name: "Small home in SD!",
     description: "Prime location and near great mexican joints",
     price: 250,
-    previewImage: "https://mediavault.point2.com/Image/Listing/8101351219_large.jpg", // Update with the actual URL for the image
+    previewImage: "https://assets.site-static.com/userFiles/1102/image/San_Diego_Mediterranean_Home.jpg", // Update with the actual URL for the image
     ownerId: 3
   },
   {

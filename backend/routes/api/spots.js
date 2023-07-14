@@ -182,25 +182,33 @@ router.put('/:spotId/edit',requireAuth, async (req, res, next) => {
     }
   })
 
-//Delete a Spot
-router.delete("/:spotId", requireAuth, async(req, res, next) =>{
+// Delete a Spot
+router.delete("/:spotId", requireAuth, async (req, res, next) => {
+  try {
     const spotId = req.params.spotId;
 
     const deleteItem = await Spot.findByPk(spotId);
 
     if (deleteItem) {
-      await deleteItem.destroy()
-      res.json({
-        "message": "Successfully deleted",
-        "statusCode": "200"
-      })
+      await deleteItem.destroy();
+      return res.status(200).json({
+        message: "Successfully deleted",
+        statusCode: 200,
+      });
     } else {
-        const err = newError(404, "Spot couldn't be found",[
-            "Spot couldn't be found"
-        ]);
-        return next(err);
+      // Spot not found
+      return res.status(404).json({
+        message: "Spot not found",
+        statusCode: 404,
+      });
     }
-  })
+  } catch (err) {
+    // Handle any unexpected errors here
+    return next(err);
+  }
+});
+
+
 
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async (req, res, next) => {

@@ -42,6 +42,7 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_USER:
       newState = Object.assign({}, state);
       newState.user = {};
+
       return newState;
     default:
       return state;

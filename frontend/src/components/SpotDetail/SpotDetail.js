@@ -22,9 +22,12 @@ const SpotDetail = () => {
             .then(res => setIsLoaded(true));
     }, [dispatch]);
 
-    console.log(spot)
+    // console.log(spot)
     // if (!spot && isLoaded) return <Redirect to='/spots' />
-    if (!spot) return <Redirect to='/spots' />
+    if (!spot) {
+        // console.log('sdfdsfsfdsfdsfdsfdsfdsfdsf')
+        return <Redirect to='/spots' />
+    }
     const isOwner = sessionUser.id === spot.ownerId;
 
     return (
