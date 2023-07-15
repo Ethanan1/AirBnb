@@ -23,7 +23,7 @@ const ReviewCard = ({ review }) => {
   }
 
   return (
-    <form className="review-form">
+    <div className="review-form">
       <div className="review-card">
         <div>Review: {review.review}</div>
         <div>Stars: {review.stars}</div>
@@ -38,7 +38,7 @@ const ReviewCard = ({ review }) => {
           </div>
         )}
       </div>
-    </form>
+    </div>
   );
 };
 

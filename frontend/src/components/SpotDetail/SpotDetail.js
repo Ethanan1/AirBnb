@@ -14,7 +14,8 @@ const SpotDetail = () => {
     const spot = useSelector(state => state.spots[spotId]);
 
     // why is my console log not hitting???
-    const deleteHandler = () => {
+    const deleteHandler = (e) => {
+        e.preventDefault();
         console.log('delete spot!!!!')
         dispatch(deleteSpot(spot.id))
     }
@@ -36,7 +37,7 @@ const SpotDetail = () => {
 
     return (
         isLoaded && (
-        <form className="spot-detail-form">
+        <div className="spot-detail-form">
             <div><h4>{spot.name}</h4></div>
             <div><i class="fa-solid fa-star"></i>{spot.avgStarRating} <a><Link to={`/spots/${spot.id}/reviews`} style={{ color: "black" }}>{spot.numReviews} reviews </Link></a></div>
             <div>{spot.city}, {spot.state}, {spot.country}</div>
@@ -48,9 +49,9 @@ const SpotDetail = () => {
             <br></br>
             <div>
                 {isOwner &&<Link to={`/spots/${spot.id}/edit`} style={{ textDecoration: 'none' }}><button className="button">Edit</button></Link>}
-                {isOwner && <button onClick={deleteHandler} className="button">Delete</button>}
+                {isOwner && <button onClick={(e)=>deleteHandler(e)} className="button">Delete</button>}
             </div>
-        </form>
+        </div>
         )
     )
 }
