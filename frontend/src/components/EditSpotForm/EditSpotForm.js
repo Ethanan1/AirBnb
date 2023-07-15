@@ -2,6 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadSingleSpot, changeSpot } from '../../store/spots';
 import { useEffect, useState } from 'react';
+import './EditSpotForm.css';
 
 const EditSpotForm = () => {
   const { spotId } = useParams();

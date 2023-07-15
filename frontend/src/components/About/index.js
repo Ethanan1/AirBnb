@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './AboutPage.css';
 
 function AboutPage() {
   return (
-    <div>
+    <div className="about-page">
       <h1>About Us</h1>
       <h2>Our Mission</h2>
       <p>

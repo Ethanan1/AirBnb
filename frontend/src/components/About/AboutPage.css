@@ -1,37 +1,38 @@
-/* AboutPage.css */
-
 .about-page {
-    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    color: #333;
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
+    color: #007bff;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: #333;
   }
 
   p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
   }
 
-  .contact-details {
-    margin-top: 30px;
-  }
-
-  .contact-details p {
-    margin-bottom: 5px;
-  }
-
-  .contact-details p:last-child {
+  p:last-child {
     margin-bottom: 0;
   }
 
+  .email {
+    font-weight: bold;
+    color: #007bff;
+  }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editReview } from '../../store/reviews';
+import './EditReview.css';
 
 const EditReviewForm = ({ review, onCancel }) => {
   const [editedReview, setEditedReview] = useState(review.review);
