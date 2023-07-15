@@ -10,16 +10,17 @@ const SpotsList = () => {
     const dispatch = useDispatch();
     const spotsObj = useSelector(state => state.spots);
     const spotsArr = Object.values(spotsObj);
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const isLoggedIn = useSelector(state => state.session.user);
+    console.log(isLoggedIn, "spotlist component")
 
     useEffect(() => {
         dispatch(loadAllSpots()).then(() => setIsLoaded(true));
     }, [dispatch]);
 
     const scrollToForm = () => {
-        // if (!isLoggedIn) {
-        //     alert('You must be logged in');
-        // } else
+        if (!isLoggedIn) {
+            alert('You must be logged in');
+        } else
         {
         const formSection = document.getElementById("form-section");
         formSection.scrollIntoView({ behavior: "smooth" });

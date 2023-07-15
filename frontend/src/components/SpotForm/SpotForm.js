@@ -16,6 +16,7 @@ const SpotForm = () => {
     const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
 
+
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
     const updateState= (e) => setState(e.target.value);
@@ -68,14 +69,14 @@ const SpotForm = () => {
 
     }
 
-    return sessionUser.id ? (
+    return sessionUser ? (
         <div>
             <div>
             {errors.length > 0 && errors.map((error) => {
                return <div>{error}</div>
             })}
             </div>
-            <form className="create-spot-form" onSubmit = {submitHandler}>
+            <form className="create-spot-form" id="form-section" onSubmit = {submitHandler}>
             <h2>Airbnb your home!</h2>
                 <div>
                 <label>Address:</label>

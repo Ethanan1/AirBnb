@@ -12,7 +12,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser.id) return (
+  if (sessionUser) return (
     <Redirect to="/" />
   );
 
@@ -47,7 +47,7 @@ function LoginFormPage() {
       <h2>Login to your account</h2>
       <div class="input-parent">
       <label>
-        Username or Email 
+        Username or Email
         <input
           type="text"
           value={credential}
@@ -72,7 +72,7 @@ function LoginFormPage() {
     </form>
     </div>
 
-    
+
   );
 }
 

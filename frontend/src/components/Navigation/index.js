@@ -9,7 +9,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
-  if (sessionUser.id) {
+  if (sessionUser?.id) {
     sessionLinks = (
       <>
       <nav className="navbar_user">
@@ -39,7 +39,7 @@ function Navigation({ isLoaded }){
 
   return (
     <div>
-      <NavLink exact to="/" className="home" style={{ color: '#FF5A5F'}}><i class='fab fa-airbnb fa-2x'></i></NavLink><br/>
+      <NavLink exact to="/" className="home" style={{ color: '#FF5A5F'}}><i className='fab fa-airbnb fa-2x'></i></NavLink><br/>
         {isLoaded && sessionLinks}
     </div>
   );
