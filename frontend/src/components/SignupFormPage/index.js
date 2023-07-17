@@ -6,7 +6,7 @@ import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector(state => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function SignupFormPage() {
   const [lastName, setlastName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser.id) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +30,7 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  //add div element to fix bug???
   return (
     <form className ="signupform" onSubmit={handleSubmit}>
       <ul>
